@@ -147,7 +147,7 @@ io.on("connection", (socket) => {
     try {
       new URL(websiteUrl);
       socket.to(roomID).emit("website-shared", { websiteUrl, userID });
-      socket.emit("website-shared", { websiteUrl, userID });
+      // socket.emit("website-shared", { websiteUrl, userID });
     } catch (error) {
       console.error("Invalid URL format on server:", error);
       socket.emit("website-share-error", { error: "Invalid URL format" });
