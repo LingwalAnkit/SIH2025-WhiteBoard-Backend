@@ -129,13 +129,8 @@ io.on("connection", (socket) => {
     socket.broadcast.to(roomID).emit("student-sleeping", userID);
   });
 
-  socket.on("message", ({ userID, message, roomID, messageCopy }) => {
-    const compressedMessage = compress({
-      userID,
-      message,
-      roomID,
-      messageCopy,
-    });
+  socket.on("message", ({ roomID, compressedMessage }) => {
+    console.log(compressedMessage);
     socket.broadcast.to(roomID).emit("message", compressedMessage);
   });
 
