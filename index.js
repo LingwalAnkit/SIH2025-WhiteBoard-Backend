@@ -9,7 +9,11 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const server = http.createServer(app);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://sih-2025-white-board.vercel.app"],
+  })
+);
 app.use(express.json());
 
 let users = new Map();
@@ -56,7 +60,7 @@ const isUrlOrTextFile = (fileType, fileName) => {
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: ["https://sih-2025-white-board.vercel.app"],
     methods: ["GET", "POST"],
   },
 });
