@@ -4,6 +4,7 @@ const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
 const pako = require("pako");
+require("dotenv").config();
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
@@ -11,7 +12,11 @@ const server = http.createServer(app);
 
 app.use(
   cors({
-    origin: ["https://sih-2025-white-board.vercel.app"],
+    origin: [
+      "https://sih-2025-white-board.vercel.app",
+      "http://localhost:3000",
+      "https://localhost:3000",
+    ],
   })
 );
 app.use(express.json());
@@ -60,7 +65,11 @@ const isUrlOrTextFile = (fileType, fileName) => {
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://sih-2025-white-board.vercel.app"],
+    origin: [
+      "https://sih-2025-white-board.vercel.app",
+      "http://localhost:3000",
+      "https://localhost:3000",
+    ],
     methods: ["GET", "POST"],
   },
 });
@@ -226,10 +235,8 @@ io.on("connection", (socket) => {
 
   socket.on("get-definition", async ({ question, userID }) => {
     console.log(question);
-    const genAI = new GoogleGenerativeAI(
-      "AIzaSyC_JbJYfF9kBVeISyBMaWT7kkAvbOJMl6g"
-    );
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt = `Explain in simple words ${question}`;
 
