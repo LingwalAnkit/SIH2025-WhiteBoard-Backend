@@ -13,6 +13,7 @@ const server = http.createServer(app);
 app.use(
   cors({
     origin: [
+      "*",
       "https://sih-2025-white-board.vercel.app",
       "http://localhost:3000",
       "https://localhost:3000",
@@ -66,6 +67,7 @@ const isUrlOrTextFile = (fileType, fileName) => {
 const io = new Server(server, {
   cors: {
     origin: [
+      "*",
       "https://sih-2025-white-board.vercel.app",
       "http://localhost:3000",
       "https://localhost:3000",
