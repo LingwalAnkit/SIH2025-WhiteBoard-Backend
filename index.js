@@ -186,9 +186,9 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("quiz", ({ correctAnswer,questions, options, roomID }) => {
-    console.log(`correct answer ${correctAnswer} and options : ${options} and question : ${questions}`);
-    socket.broadcast.to(roomID).emit("quiz", { correctAnswer, questions, options, roomID  });
+  socket.on("quiz", ({ correctAnswer, question, options, roomID }) => {
+    console.log(`correct answer ${correctAnswer} and options : ${options} and question : ${question}`);
+    socket.broadcast.to(roomID).emit("quiz", { correctAnswer, question, options, roomID  });
   });
 
   socket.on("file", ({ roomID, fileName, fileType, fileData }) => {
